@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Box, Paper, Typography, Grid } from '@mui/material';
+import { Box, Paper, Typography, Grid, Card, CardContent } from '@mui/material';
 import { collection, query, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
 
@@ -37,49 +37,68 @@ const Summary = () => {
     return () => unsubscribe();
   }, []);
 
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND'
+    }).format(amount);
+  };
+
   return (
     <Box sx={{ mb: 4 }}>
+      {/* Main Balance Card */}
+      <Card 
+        sx={{ 
+          mb: 3, 
+          background: 'linear-gradient(135deg, #0091FF 0%, #0070E0 100%)',
+          color: 'white',
+          borderRadius: 3,
+        }}
+      >
+        <CardContent sx={{ p: 3 }}>
+          <Typography variant="subtitle2" sx={{ mb: 1, opacity: 0.8 }}>
+            Tổng Số Dư
+          </Typography>
+          <Typography variant="h4" sx={{ mb: 2 }}>
+            {formatCurrency(summary.balance)}
+          </Typography>
+        </CardContent>
+      </Card>
+
+      {/* Statistics Grid */}
       <Grid container spacing={2}>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={6}>
           <Paper
-            elevation={2}
+            elevation={0}
             sx={{
               p: 2,
-              textAlign: 'center',
               bgcolor: 'success.light',
-              color: 'success.contrastText',
+              borderRadius: 3,
             }}
           >
-            <Typography variant="h6">Income</Typography>
-            <Typography variant="h4">${summary.income}</Typography>
+            <Typography variant="subtitle2" color="success.dark" sx={{ mb: 1 }}>
+              Thu Nhập
+            </Typography>
+            <Typography variant="h6" color="success.main">
+              {formatCurrency(summary.income)}
+            </Typography>
           </Paper>
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={6}>
           <Paper
-            elevation={2}
+            elevation={0}
             sx={{
               p: 2,
-              textAlign: 'center',
               bgcolor: 'error.light',
-              color: 'error.contrastText',
+              borderRadius: 3,
             }}
           >
-            <Typography variant="h6">Expenses</Typography>
-            <Typography variant="h4">${summary.expenses}</Typography>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <Paper
-            elevation={2}
-            sx={{
-              p: 2,
-              textAlign: 'center',
-              bgcolor: 'primary.light',
-              color: 'primary.contrastText',
-            }}
-          >
-            <Typography variant="h6">Balance</Typography>
-            <Typography variant="h4">${summary.balance}</Typography>
+            <Typography variant="subtitle2" color="error.main" sx={{ mb: 1 }}>
+              Chi Tiêu
+            </Typography>
+            <Typography variant="h6" color="error.main">
+              {formatCurrency(summary.expenses)}
+            </Typography>
           </Paper>
         </Grid>
       </Grid>

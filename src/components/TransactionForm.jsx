@@ -29,7 +29,7 @@ const TransactionForm = () => {
         category: '',
       });
     } catch (error) {
-      console.error('Error adding transaction:', error);
+      console.error('Lỗi khi thêm giao dịch:', error);
     }
   };
 
@@ -44,21 +44,21 @@ const TransactionForm = () => {
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{ mb: 4 }}>
       <FormControl fullWidth sx={{ mb: 2 }}>
-        <InputLabel>Type</InputLabel>
+        <InputLabel>Loại</InputLabel>
         <Select
           name="type"
           value={formData.type}
-          label="Type"
+          label="Loại"
           onChange={handleChange}
         >
-          <MenuItem value="income">Income</MenuItem>
-          <MenuItem value="expense">Expense</MenuItem>
+          <MenuItem value="income">Thu Nhập</MenuItem>
+          <MenuItem value="expense">Chi Tiêu</MenuItem>
         </Select>
       </FormControl>
 
       <TextField
         fullWidth
-        label="Amount"
+        label="Số Tiền"
         name="amount"
         type="number"
         value={formData.amount}
@@ -68,7 +68,7 @@ const TransactionForm = () => {
 
       <TextField
         fullWidth
-        label="Description"
+        label="Mô Tả"
         name="description"
         value={formData.description}
         onChange={handleChange}
@@ -77,7 +77,7 @@ const TransactionForm = () => {
 
       <TextField
         fullWidth
-        label="Category"
+        label="Danh Mục"
         name="category"
         value={formData.category}
         onChange={handleChange}
@@ -90,7 +90,7 @@ const TransactionForm = () => {
         color="primary"
         fullWidth
       >
-        Add Transaction
+        Thêm Giao Dịch
       </Button>
     </Box>
   );

@@ -8,7 +8,6 @@ const TransactionForm = () => {
     type: 'expense',
     amount: '',
     description: '',
-    category: '',
   });
 
   const handleSubmit = async (e) => {
@@ -26,7 +25,6 @@ const TransactionForm = () => {
         type: 'expense',
         amount: '',
         description: '',
-        category: '',
       });
     } catch (error) {
       console.error('Lỗi khi thêm giao dịch:', error);
@@ -51,8 +49,8 @@ const TransactionForm = () => {
           label="Loại"
           onChange={handleChange}
         >
-          <MenuItem value="income">Thu Nhập</MenuItem>
-          <MenuItem value="expense">Chi Tiêu</MenuItem>
+          <MenuItem value="income">Thu</MenuItem>
+          <MenuItem value="expense">Chi</MenuItem>
         </Select>
       </FormControl>
 
@@ -75,20 +73,20 @@ const TransactionForm = () => {
         sx={{ mb: 2 }}
       />
 
-      <TextField
-        fullWidth
-        label="Danh Mục"
-        name="category"
-        value={formData.category}
-        onChange={handleChange}
-        sx={{ mb: 2 }}
-      />
-
       <Button
         type="submit"
         variant="contained"
-        color="primary"
         fullWidth
+        sx={{
+          background: '#4dd0e1',
+          color: '#1e3947',
+          fontWeight: 600,
+          '&:hover': {
+            background: '#00acc1',
+          },
+          py: 1.5,
+          fontSize: '1rem',
+        }}
       >
         Thêm Giao Dịch
       </Button>
